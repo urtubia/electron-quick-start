@@ -4,7 +4,7 @@
 
 
 var fs = require('fs');
-var { shell } = require('electron');
+var { shell, ipcRenderer } = require('electron');
 
 var files = fs.readdirSync('.');
 files.map( (file) => {
@@ -15,5 +15,5 @@ files.map( (file) => {
 
 window.openFile = function(theFile) {
   alert(theFile);
-  shell.openItem(theFile);
+  ipcRenderer.send('super-exclusive-file-passing-channel', theFile);
 }
